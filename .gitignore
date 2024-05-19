@@ -12,3 +12,4 @@ runs
 .idea
 yolov8n.pt
 tests
+db.sqlite3
