@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "Todoapp"
+version = "0.1.0"
+description = "Simple RESTfull web-API on Django (backend) and React (frontend). Sample application: todo's"
+authors = ["nhassl3 <thefanta284@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+Django = "5.0.6"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
