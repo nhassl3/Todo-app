@@ -1,6 +1,7 @@
 from rest_framework import generics, permissions
 from django.db import IntegrityError
 from django.contrib.auth.models import User
+from django.contrib.auth import authenticate
 from rest_framework.parsers import JSONParser
 from rest_framework.authtoken.models import Token
 from django.http import JsonResponse
@@ -57,11 +58,26 @@ def signup(request):
         try:
             data = JSONParser().parse(request)
             user = User.objects.create_user(
-                username=data['username'],
-                password=data['password']
+                username=data['username'], password=data['password']
             )
             user.save()
             token = Token.objects.create(user=user)  # type: ignore
             return JsonResponse({'token': str(token)}, status=201)
         except IntegrityError:
             return JsonResponse({'error': 'User already exists'}, status=400)
+
+
+@csrf_exempt
+def login(request):
+    if request == "POST":
+        data = JSONParser().parse(request)
+        user = authenticate(
+            username=data['username'], password=data['password']
+        )
+        if user is None:
+            return JsonResponse({'error': 'Invalid username or password'}, status=400)
+        try:
+            token = Token.objects.get(user=user)  # type: ignore
+        except:
+            token = Token.objects.create(user=user)  # type: ignore
+        return JsonResponse({'token': str(token)}, status=201)

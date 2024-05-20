@@ -9,4 +9,5 @@ urlpatterns = [
     path('todos/<int:pk>', views.TodoRetrieveUpdateDestroy.as_view(), name='todo-CRUD'),
     path('todos/<int:pk>/complete', views.TodoToggleComplete.as_view(), name='todo-toggle-complete'),
     path('signup/', views.signup, name='signup'),
+    path('login/', views.login, name='login'),
 ]
