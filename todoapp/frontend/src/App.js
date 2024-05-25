@@ -111,21 +111,16 @@ function App() {
 				</Switch>
 			</div>
 
-			<footer className='text-center bg-light text-muted mt-4 navbar fixed-bottom'>
-				<div className='container text-center p-4'>
-					©Copyright -{' '}
+			<footer
+				className='text-center text-lg-start
+bg-light text-muted mt-4 fixed-bottom'
+			>
+				<div className='text-center p-4'>
+					©Copyright {new Date().getFullYear() + ' '}
 					<a
 						target='_blank'
 						className='text-reset fw-bold text-decoration-none'
-						href='https://twitter.com/greglim81'
-					>
-						Matthew Nhassl3
-					</a>{' '}
-					-{' '}
-					<a
-						target='_blank'
-						className='text-reset fw-bold text-decoration-none'
-						href='https://twitter.com/danielgarax'
+						href='https://t.me/nhassl3'
 					>
 						Matthew Nhassle
 					</a>
