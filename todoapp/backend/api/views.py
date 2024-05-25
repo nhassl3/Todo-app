@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from rest_framework import generics, permissions
 from django.db import IntegrityError
 from django.contrib.auth.models import User
@@ -10,7 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from todoapp.backend.api.serializers import TodoSerializer, TodoToggleCompleteSerializer
 from todoapp.backend.todo.models import Todo
 
-__all__ = ('TodoListCreate', 'TodoListView',)
+__all__ = ['TodoListCreate', 'TodoListView', 'TodoRetrieveUpdateDestroy', 'TodoToggleComplete', 'signup', 'login']
 
 
 class TodoListView(generics.ListAPIView):
@@ -58,7 +59,8 @@ def signup(request):
         try:
             data = JSONParser().parse(request)
             user = User.objects.create_user(
-                username=data['username'], password=data['password']
+                username=data['username'],
+                password=data['password']
             )
             user.save()
             token = Token.objects.create(user=user)  # type: ignore
@@ -69,7 +71,7 @@ def signup(request):
 
 @csrf_exempt
 def login(request):
-    if request == "POST":
+    if request.method == "POST":
         data = JSONParser().parse(request)
         user = authenticate(
             username=data['username'], password=data['password']
@@ -81,3 +83,4 @@ def login(request):
         except:
             token = Token.objects.create(user=user)  # type: ignore
         return JsonResponse({'token': str(token)}, status=201)
+    
