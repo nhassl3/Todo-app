@@ -12,3 +12,5 @@ runs
 .idea
 yolov8n.pt
 tests
+doc.pdf
+__pycache__
